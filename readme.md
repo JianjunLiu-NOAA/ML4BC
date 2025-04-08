@@ -87,19 +87,16 @@ To train the model on Hera with GPU, change the path for the "data_dir" in train
 An example batch script named train_unet.sh for executing on NOAA Hera utilizing 8 GPUs:
 
     #!/bin/bash
-    
-    process='unet_training'
-    
     #SBATCH -A $ACCNT
     #SBATCH -p fge
     #SBATCH -q gpuwf
-    #SBATCH -J {process}
+    #SBATCH -J unet_training
     #SBATCH -N 1
     #SBATCH -n 1
     #SBATCH --ntasks-per-node=8
     #SBATCH --time=168:00:00
-    #SBATCH -o {process}_output.out
-    #SBATCH -e {process}_error.out
+    #SBATCH -o unet_training_output.out
+    #SBATCH -e unet_training_error.out
     
     # Activate the Conda environment
     conda activate ml4bc
@@ -122,18 +119,15 @@ To do bias correction with the final model weights on Hera, change the path for 
 An example batch script named predict_unet.sh for executing on NOAA Hera utilizing a single CPU:
 
     #!/bin/bash
-    
-    process='unet_predict'
-    
     #SBATCH -A $ACCNT
     #SBATCH -p hera
-    #SBATCH -J {process}
+    #SBATCH -J unet_predict
     #SBATCH -N 1
     #SBATCH -n 1
     #SBATCH --cpus-per-task=1
     #SBATCH --time=8:00:00
-    #SBATCH -o {process}_output.out
-    #SBATCH -e {process}_error.out
+    #SBATCH -o unet_predict_output.out
+    #SBATCH -e unet_predict_error.out
     
     # Activate the Conda environment
     conda activate ml4bc
